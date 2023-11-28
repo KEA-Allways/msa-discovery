@@ -100,13 +100,17 @@ pipeline {
             echo 'Run Container on Dev Server'
             
             sshagent(['ec2-ssh']) {
-            
+
                 sh 'ssh -o StrictHostKeyChecking=no ${username}@${ip} "whoami"'
 
+                // Check if the Docker container is running
+                def isContainerRunning = sh(script: "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker ps -q -f name=${springname}'", returnStatus: true) == 0
+
+                if(isContainerRunning) {
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker stop ${springname}'"
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker rm ${springname}'"
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker rmi ${imagename}:${tagname}'"
-                
+                }
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker pull ${imagename}:${tagname}'"
                 sh "ssh -o StrictHostKeyChecking=no ${username}@${ip} 'docker run -d -p ${port}:${port} --name ${springname} ${imagename}:${tagname}'"
             }
