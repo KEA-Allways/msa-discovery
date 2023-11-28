@@ -46,3 +46,4 @@ bootJar{
 	archivesBaseName = 'allways'
 	archiveFileName = 'msa-discovery.jar'
 }
+//
