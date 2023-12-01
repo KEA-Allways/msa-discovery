@@ -1,11 +1,10 @@
 spring:
   application:
-    name: discovery-service
+    name: msa-discovery
 server:
   port: 8761
 eureka:
   instance:
-    hostname: localhost
   client:
     register-with-eureka: true
     fetch-registry: false
