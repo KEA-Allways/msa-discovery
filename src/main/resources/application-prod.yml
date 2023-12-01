@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: msa-discovery
+server:
+  port: 8761
+eureka:
+  instance:
+  client:
+    register-With-eureka: true
+    fetch-Registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.name}:${server.port}/eureka/
