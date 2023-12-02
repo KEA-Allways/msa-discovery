@@ -9,4 +9,4 @@ eureka:
     register-With-eureka: true
     fetch-Registry: false
     serviceUrl:
-      defaultZone: http://localhost/:${server.port}/eureka/
+      defaultZone: http://54.237.219.35/:${server.port}/eureka/
