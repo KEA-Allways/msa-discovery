@@ -45,39 +45,7 @@ pipeline {
           }
         }
 
-        stage('Add Gradle Plugin') {
-                    steps {
-                        script {
-                            // Gradle 플러그인을 추가할 파일 경로 설정
-                            def buildGradleFile = "/build.gradle"
-                            // 추가할 플러그인 이름 설정
-                            def pluginName = 'id "org.sonarqube" version "4.2.1.3168"'
 
-                            // build.gradle 파일을 읽어옴
-                            def buildGradle = readFile(buildGradleFile)
-
-                            // 플러그인을 추가할 위치 확인
-                            def insertIndex = buildGradle.indexOf("plugins {") + 10
-
-                            // sonarqube 플러그인을 추가
-                            buildGradle = buildGradle.substring(0, insertIndex) + "\n    " + pluginName + "\n" + buildGradle.substring(insertIndex)
-
-                            // build.gradle 파일 업데이트
-                            writeFile(file: buildGradleFile, text: buildGradle)
-                        }
-                    }
-                }
-                stage('Build') {
-                    steps {
-                        sh '''
-                        ./gradlew sonar \
-                          -Dsonar.projectKey=msa-discovery \
-                          -Dsonar.projectName=msa-discovery \
-                          -Dsonar.host.url='http://18.204.16.65:9000' \
-                          -Dsonar.token=sonarqube-access-token
-                        '''
-                    }
-                }
 
         // gradle build
         stage('Bulid Gradle') {
