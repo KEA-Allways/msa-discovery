@@ -9,6 +9,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew bootJar
 FROM openjdk:11-slim
 COPY --from=builder build/libs/*.jar msa-discovery.jar
+COPY --from=builder elastic-apm-agent-1.44.0.jar elastic-apm-agent-1.44.0.jar
 VOLUME /tmp
 ENTRYPOINT ["java",
 "-javaagent:./elastic-apm-agent-1.44.0.jar",
