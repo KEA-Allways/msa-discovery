@@ -11,8 +11,8 @@ FROM openjdk:11-slim
 COPY --from=builder build/libs/*.jar msa-discovery.jar
 COPY --from=builder elastic-apm-agent-1.44.0.jar .
 VOLUME /tmp
+ENV JAVA_TOOL_OPTIONS="-javaagent:/elastic-apm-agent-1.44.0.jar"
 ENTRYPOINT ["java",
-"-javaagent:/elastic-apm-agent-1.44.0.jar",
  "-Dspring.profiles.active=prod",
  "-Delastic.apm.service_name=msa-discovery",
  "-Delastic.apm.secret_token=hyUExzAkUlugz8LsPW",
