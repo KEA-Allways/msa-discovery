@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: msa-discovery
@@ -7,7 +6,7 @@ server:
 eureka:
   instance:
   client:
-    register-With-eureka: true
-    fetch-Registry: false
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
       defaultZone: http://localhost:${server.port}/eureka/

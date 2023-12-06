@@ -7,7 +7,7 @@ pipeline {
         
         
         //서버 정보
-        ip = "54.87.40.18"
+        ip = "3.213.139.105"
         username = "ubuntu"
         
         //스프링 서버 정보
@@ -44,6 +44,8 @@ pipeline {
              }
           }
         }
+
+
 
         // gradle build
         stage('Bulid Gradle') {
